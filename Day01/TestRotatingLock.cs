@@ -2,7 +2,7 @@ namespace advent.of.code_2025.Day01;
 
 public class TestRotatingLock
 {
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact]
     public void WhenDialIsNotRotated_ThenPositionDoesNotChange()
     {
         var startingPosition = 50;
@@ -14,7 +14,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact]
     public void WhenDialIsRotatedLeft_ThenPositionIsSubtracted()
     {
         var startingPosition = 50;
@@ -26,7 +26,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact]
     public void WhenDialIsRotatedRight_ThenPositionIsAdded()
     {
         var startingPosition = 50;
@@ -38,7 +38,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact(Skip = "Right Requirement, but not yet fixed")]
     public void WhenDialIsRotatedByFullTurn_ThenPositionDoesNotChange()
     {
         var startingPosition = 50;
@@ -48,10 +48,10 @@ public class TestRotatingLock
         sut.Dial.Rotate("L100");
         
         Assert.Equal(startingPosition, sut.Dial.Position);
-        Assert.Equal(0, sut.Dial.ExpectedPassword);
+        Assert.Equal(2, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact]
     public void WhenDialIsTurnedToLandOnZero_ThenExpectedPasswordIsIncreasedByOne()
     {
         var startingPosition = 50;
@@ -63,7 +63,7 @@ public class TestRotatingLock
         Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact(Skip = "Right Requirement, but not yet fixed")]
     public void WhenDialIsTurnedLeftOverZero_ThenExpectedPasswordIsSubtractedBy100()
     {
         var startingPosition = 50;
@@ -72,14 +72,14 @@ public class TestRotatingLock
         sut.Dial.Rotate("L51");
         
         Assert.Equal(99, sut.Dial.Position);
-        Assert.Equal(0, sut.Dial.ExpectedPassword);
+        Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact(Skip = "Right Requirement, but not yet fixed")]
     public void RiddleExample()
     {
         var startingPosition = 50;
-        var expectedPasswordInRiddle = 3;
+        var expectedPasswordInRiddle = 6;
         var sut = new Lock(startingPosition);
         
         sut.Dial.Rotate("L68");
@@ -96,10 +96,10 @@ public class TestRotatingLock
         Assert.Equal(expectedPasswordInRiddle, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Wrong Requirements")]
+    [Fact(Skip = "Right Requirement, but not yet fixed")]
     public void LockSolver()
     {
-        var expected = 3;
+        var expected = 6;
         var startingPosition = 50;
         var dialInput = File.ReadLines("./Day01/TestInput.txt");
         var sut = new LockSolver(dialInput, startingPosition);
@@ -109,7 +109,7 @@ public class TestRotatingLock
         Assert.Equal(expected, actual);
     }
 
-    [Fact(DisplayName = "Solution", Skip = "Wrong Requirements")]
+    [Fact(DisplayName = "Solution", Skip = "Skip by default")]
     public void LockSolver2()
     {
         var expected = 0;
