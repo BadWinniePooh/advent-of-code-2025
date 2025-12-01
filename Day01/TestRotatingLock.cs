@@ -34,4 +34,15 @@ public class TestRotatingLock
 
         Assert.Equal(55, sut.Dial.Position);
     }
+
+    [Fact]
+    public void WhenDialIsRotatedByFullTurn_ThenPositionDoesNotChange()
+    {
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("R100");
+        
+        Assert.Equal(startingPosition, sut.Dial.Position);
+    }
 }

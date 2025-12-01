@@ -13,6 +13,7 @@ public class Dial(int startingPosition)
         {
             Position += rotationAmount;
         }
+        Position %= 100;
     }
 
     public int Position { get; private set; } = startingPosition;
