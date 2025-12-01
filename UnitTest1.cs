@@ -13,6 +13,18 @@ public class UnitTest1
         Assert.Equal(50, 
             sut.Dial.Position);
     }
+
+    [Fact]
+    public void T2()
+    {
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("L5");
+        
+        Assert.Equal(45,
+            sut.Dial.Position);
+    }
 }
 
 public class Lock
@@ -22,7 +34,7 @@ public class Lock
         Dial = new Dial(startingPosition);
     }
 
-    public Dial Dial { get; set; }
+    public Dial Dial { get; }
 }
 
 public class Dial
@@ -34,7 +46,12 @@ public class Dial
 
     public void Rotate(string input)
     {
+        var rotationAmount = int.Parse(input.Remove(0, 1));
+        if (input.StartsWith('L'))
+        {
+            Position -= rotationAmount;
+        }
     }
 
-    public int Position { get; set; }
+    public int Position { get; private set; }
 }
