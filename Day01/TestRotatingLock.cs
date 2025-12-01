@@ -109,20 +109,3 @@ public class TestRotatingLock
         Assert.Equal(expected, actual);
     }
 }
-
-public class LockSolver(IEnumerable<string> dialInput, int startingPosition)
-{
-    private IEnumerable<string> DialInput { get; set; } = dialInput;
-    private Lock Lock { get; set; } = new(startingPosition);
-
-    public int Solve()
-    {
-        var dial = Lock.Dial;
-        foreach (var input in DialInput)
-        {
-            dial.Rotate(input);
-        }
-
-        return dial.ExpectedPassword;
-    }
-}
