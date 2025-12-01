@@ -162,6 +162,7 @@ public class TestRotatingLock
     }
 
     [Fact(DisplayName = "Solution", Skip = "Skip by default")]
+    //[Fact(DisplayName = "Solution")]
     public void LockSolver2()
     {
         var expected = 0;
