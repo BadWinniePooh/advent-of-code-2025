@@ -11,13 +11,18 @@ public class Dial(int startingPosition)
             if (Position < 0)
             {
                 Position += 100;
+                ExpectedPassword++;
             }
         } 
         else if (input.StartsWith('R'))
         {
             Position += rotationAmount;
+            if (Position > 99)
+            {
+                Position -= 100;
+                ExpectedPassword++;
+            }
         }
-        Position %= 100;
 
         if (Position == 0)
         {

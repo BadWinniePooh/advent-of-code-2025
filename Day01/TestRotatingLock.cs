@@ -38,8 +38,8 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Right Requirement, but not yet fixed")]
-    public void WhenDialIsRotatedByFullTurn_ThenPositionDoesNotChange()
+    [Fact]
+    public void WhenDialIsRotatedByFullTurn_ThenForEveryPassOfZeroExpectedPasswordIsIncreasedByOne()
     {
         var startingPosition = 50;
         var sut = new Lock(startingPosition);
