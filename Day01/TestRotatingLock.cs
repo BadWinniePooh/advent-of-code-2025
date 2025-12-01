@@ -74,4 +74,25 @@ public class TestRotatingLock
         Assert.Equal(99, sut.Dial.Position);
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
+
+    [Fact]
+    public void RiddleExample()
+    {
+        var startingPosition = 50;
+        var expectedPasswordInRiddle = 3;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("L68");
+        sut.Dial.Rotate("L30");
+        sut.Dial.Rotate("R48");
+        sut.Dial.Rotate("L5");
+        sut.Dial.Rotate("R60");
+        sut.Dial.Rotate("L55");
+        sut.Dial.Rotate("L1");
+        sut.Dial.Rotate("L99");
+        sut.Dial.Rotate("R14");
+        sut.Dial.Rotate("L82");
+        
+        Assert.Equal(expectedPasswordInRiddle, sut.Dial.ExpectedPassword);
+    }
 }
