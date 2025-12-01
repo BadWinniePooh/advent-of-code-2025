@@ -2,8 +2,8 @@
 
 public class LockSolver(IEnumerable<string> dialInput, int startingPosition)
 {
-    private IEnumerable<string> DialInput { get; set; } = dialInput;
-    private Lock Lock { get; set; } = new(startingPosition);
+    private IEnumerable<string> DialInput { get; } = dialInput;
+    private Lock Lock { get; } = new(startingPosition);
 
     public int Solve()
     {
