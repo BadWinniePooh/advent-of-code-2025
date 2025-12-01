@@ -1,4 +1,6 @@
-namespace advent.of.code_2025.Day01;
+using advent.of.code_2025.day01;
+
+namespace advent.of.code_2025.tests.day01;
 
 public class TestRotatingLock
 {

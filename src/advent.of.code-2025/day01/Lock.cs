@@ -1,4 +1,4 @@
-﻿namespace advent.of.code_2025.Day01;
+﻿namespace advent.of.code_2025.day01;
 
 public class Lock(int startingPosition)
 {

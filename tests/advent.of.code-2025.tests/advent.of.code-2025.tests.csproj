@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <RootNamespace>advent.of.code_2025</RootNamespace>
+        <RootNamespace>advent.of.code_2025.tests</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -22,10 +22,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Day01\TestInput.txt">
+      <ProjectReference Include="..\..\src\advent.of.code-2025\advent.of.code-2025.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="day01\TestInput.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Day01\PuzzleInput">
+      <None Update="day01\PuzzleInput">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
