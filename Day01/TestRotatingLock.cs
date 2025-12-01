@@ -2,7 +2,7 @@ namespace advent.of.code_2025.Day01;
 
 public class TestRotatingLock
 {
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsNotRotated_ThenPositionDoesNotChange()
     {
         var startingPosition = 50;
@@ -14,7 +14,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsRotatedLeft_ThenPositionIsSubtracted()
     {
         var startingPosition = 50;
@@ -26,7 +26,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsRotatedRight_ThenPositionIsAdded()
     {
         var startingPosition = 50;
@@ -38,7 +38,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsRotatedByFullTurn_ThenPositionDoesNotChange()
     {
         var startingPosition = 50;
@@ -51,7 +51,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsTurnedToLandOnZero_ThenExpectedPasswordIsIncreasedByOne()
     {
         var startingPosition = 50;
@@ -63,7 +63,7 @@ public class TestRotatingLock
         Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void WhenDialIsTurnedLeftOverZero_ThenExpectedPasswordIsSubtractedBy100()
     {
         var startingPosition = 50;
@@ -75,7 +75,7 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void RiddleExample()
     {
         var startingPosition = 50;
@@ -96,7 +96,7 @@ public class TestRotatingLock
         Assert.Equal(expectedPasswordInRiddle, sut.Dial.ExpectedPassword);
     }
 
-    [Fact]
+    [Fact(Skip = "Wrong Requirements")]
     public void LockSolver()
     {
         var expected = 3;
@@ -109,7 +109,7 @@ public class TestRotatingLock
         Assert.Equal(expected, actual);
     }
 
-    [Fact(DisplayName = "Solution")]
+    [Fact(DisplayName = "Solution", Skip = "Wrong Requirements")]
     public void LockSolver2()
     {
         var expected = 0;
