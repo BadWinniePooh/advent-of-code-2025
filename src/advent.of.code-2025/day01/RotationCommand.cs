@@ -11,7 +11,7 @@ public record RotationCommand(RotationDirection Direction, int Amount)
             _ => throw new ArgumentException($"Invalid direction: '{input[0]}'")
         };
 
-        if (!int.TryParse(input[1..], out var amount) || amount < 0)
+        if (!int.TryParse(input[1..], out var amount))
             throw new ArgumentException($"Invalid amount: '{input[1..]}'");
         return new RotationCommand(direction, amount);
     }
