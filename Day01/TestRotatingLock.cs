@@ -108,4 +108,17 @@ public class TestRotatingLock
         
         Assert.Equal(expected, actual);
     }
+
+    [Fact(DisplayName = "Solution")]
+    public void LockSolver2()
+    {
+        var expected = 0;
+        var startingPosition = 50;
+        var dialInput = File.ReadLines("./Day01/PuzzleInput");
+        var sut = new LockSolver(dialInput, startingPosition);
+        
+        var actual = sut.Solve();
+        
+        Assert.Equal(expected, actual);
+    }
 }
