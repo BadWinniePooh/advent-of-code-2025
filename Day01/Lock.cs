@@ -2,5 +2,9 @@
 
 public class Lock(int startingPosition)
 {
-    public Dial Dial { get; } = new(startingPosition);
+    private readonly Dial _dial = new(startingPosition);
+
+    public void Rotate(string rotation) => _dial.Rotate(rotation);
+    public int CurrentPosition => _dial.Position;
+    public int Password => _dial.ExpectedPassword;
 }

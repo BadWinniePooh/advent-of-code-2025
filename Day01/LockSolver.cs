@@ -7,12 +7,12 @@ public class LockSolver(IEnumerable<string> dialInput, int startingPosition)
 
     public int Solve()
     {
-        var dial = Lock.Dial;
+       
         foreach (var input in DialInput)
         {
-            dial.Rotate(input);
+            Lock.Rotate(input);
         }
 
-        return dial.ExpectedPassword;
+        return Lock.Password;
     }
 }
