@@ -2,6 +2,9 @@
 
 public class Dial(int startingPosition)
 {
+    private const int DialPositions = 100;
+    private const int MinPosition = 0;
+
     public void Rotate(string input)
     {
         var rotationAmount = int.Parse(input.Remove(0, 1));
@@ -10,9 +13,9 @@ public class Dial(int startingPosition)
         {
             var newPosition = Position - rotationAmount;
             
-            if (Position == 0)
+            if (Position == MinPosition)
             {
-                ExpectedPassword += rotationAmount / 100;
+                ExpectedPassword += rotationAmount / DialPositions;
             }
             else
             {
@@ -20,17 +23,17 @@ public class Dial(int startingPosition)
                 if (rotationAmount >= distanceFromZero)
                 {
                     var remainingAfterFirstCross = rotationAmount - distanceFromZero;
-                    ExpectedPassword += 1 + (remainingAfterFirstCross / 100);
+                    ExpectedPassword += 1 + (remainingAfterFirstCross / DialPositions);
                 }
             }
             
-            Position = ((newPosition % 100) + 100) % 100;
+            Position = ((newPosition % DialPositions) + DialPositions) % DialPositions;
         }
         else if (input.StartsWith('R'))
         {
             var newPosition = Position + rotationAmount;
-            ExpectedPassword += newPosition / 100;
-            Position = newPosition % 100;
+            ExpectedPassword += newPosition / DialPositions;
+            Position = newPosition % DialPositions;
         }
     }
 
