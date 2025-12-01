@@ -8,6 +8,10 @@ public class Dial(int startingPosition)
         if (input.StartsWith('L'))
         {
             Position -= rotationAmount;
+            if (Position < 0)
+            {
+                Position *= -1;
+            }
         } 
         else if (input.StartsWith('R'))
         {

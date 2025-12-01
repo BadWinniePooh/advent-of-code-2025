@@ -42,6 +42,7 @@ public class TestRotatingLock
         var sut = new Lock(startingPosition);
         
         sut.Dial.Rotate("R100");
+        sut.Dial.Rotate("L100");
         
         Assert.Equal(startingPosition, sut.Dial.Position);
     }
