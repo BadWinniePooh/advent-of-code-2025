@@ -109,6 +109,32 @@ public class TestRotatingLock
         Assert.Equal(expected, actual);
     }
 
+    [Fact]
+    public void ASingleRotationOf1000WouldCauseTheDialToPointAtZero_TenTimes()
+    {
+        var expected = 10;
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("R1000");
+        
+        Assert.Equal(startingPosition, sut.Dial.Position);
+        Assert.Equal(expected, sut.Dial.ExpectedPassword);
+    }
+    
+    [Fact]
+    public void ASingleRotationOf1001WouldCauseTheDialToPointAtZero_TenTimes()
+    {
+        var expected = 10;
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("R1001");
+        
+        Assert.Equal(51, sut.Dial.Position);
+        Assert.Equal(expected, sut.Dial.ExpectedPassword);
+    }
+
     [Fact(DisplayName = "Solution", Skip = "Skip by default")]
     public void LockSolver2()
     {

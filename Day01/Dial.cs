@@ -5,35 +5,35 @@ public class Dial(int startingPosition)
     public void Rotate(string input)
     {
         var rotationAmount = int.Parse(input.Remove(0, 1));
-        var PreviousPosition = Position;
+        
         if (input.StartsWith('L'))
         {
-            Position -= rotationAmount;
-            if (Position < 0)
+            var newPosition = Position - rotationAmount;
+            
+            if (Position == 0)
             {
-                Position += 100;
-                if (PreviousPosition != 0)
+                ExpectedPassword += rotationAmount / 100;
+            }
+            else
+            {
+                var distanceFromZero = Position;
+                if (rotationAmount >= distanceFromZero)
                 {
-                    ExpectedPassword++;
+                    var remainingAfterFirstCross = rotationAmount - distanceFromZero;
+                    ExpectedPassword += 1 + (remainingAfterFirstCross / 100);
                 }
             }
-            else if (Position == 0)
-            {
-                ExpectedPassword++;
-            }
-        } 
+            
+            Position = ((newPosition % 100) + 100) % 100;
+        }
         else if (input.StartsWith('R'))
         {
-            Position += rotationAmount;
-            if (Position > 99)
-            {
-                Position -= 100;
-                ExpectedPassword++;
-            }
+            var newPosition = Position + rotationAmount;
+            ExpectedPassword += newPosition / 100;
+            Position = newPosition % 100;
         }
     }
 
-    private int PreviousPosition { get; set; }
     public int Position { get; private set; } = startingPosition;
     public int ExpectedPassword { get; private set; }
 }
