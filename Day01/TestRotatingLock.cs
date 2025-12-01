@@ -52,7 +52,7 @@ public class TestRotatingLock
     }
 
     [Fact]
-    public void t1()
+    public void WhenDialIsTurnedToLandOnZero_ThenExpectedPasswordIsIncreasedByOne()
     {
         var startingPosition = 50;
         var sut = new Lock(startingPosition);
