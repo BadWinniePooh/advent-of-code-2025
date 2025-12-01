@@ -62,4 +62,16 @@ public class TestRotatingLock
         Assert.Equal(0, sut.Dial.Position);
         Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
+
+    [Fact]
+    public void WhenDialIsTurnedLeftOverZero_ThenExpectedPasswordIsSubtractedBy100()
+    {
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("L51");
+        
+        Assert.Equal(99, sut.Dial.Position);
+        Assert.Equal(0, sut.Dial.ExpectedPassword);
+    }
 }

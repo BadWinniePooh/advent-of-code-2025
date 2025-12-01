@@ -10,7 +10,7 @@ public class Dial(int startingPosition)
             Position -= rotationAmount;
             if (Position < 0)
             {
-                Position *= -1;
+                Position += 100;
             }
         } 
         else if (input.StartsWith('R'))
