@@ -18,7 +18,13 @@ public class Dial(int startingPosition)
             Position += rotationAmount;
         }
         Position %= 100;
+
+        if (Position == 0)
+        {
+            ExpectedPassword++;
+        }
     }
 
     public int Position { get; private set; } = startingPosition;
+    public int ExpectedPassword { get; private set; }
 }

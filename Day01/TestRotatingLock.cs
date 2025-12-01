@@ -11,6 +11,7 @@ public class TestRotatingLock
         sut.Dial.Rotate("L0");
         
         Assert.Equal(startingPosition, sut.Dial.Position);
+        Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
     [Fact]
@@ -22,6 +23,7 @@ public class TestRotatingLock
         sut.Dial.Rotate("L5");
         
         Assert.Equal(45, sut.Dial.Position);
+        Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
     [Fact]
@@ -33,6 +35,7 @@ public class TestRotatingLock
         sut.Dial.Rotate("R5");
 
         Assert.Equal(55, sut.Dial.Position);
+        Assert.Equal(0, sut.Dial.ExpectedPassword);
     }
 
     [Fact]
@@ -45,5 +48,18 @@ public class TestRotatingLock
         sut.Dial.Rotate("L100");
         
         Assert.Equal(startingPosition, sut.Dial.Position);
+        Assert.Equal(0, sut.Dial.ExpectedPassword);
+    }
+
+    [Fact]
+    public void t1()
+    {
+        var startingPosition = 50;
+        var sut = new Lock(startingPosition);
+        
+        sut.Dial.Rotate("L50");
+        
+        Assert.Equal(0, sut.Dial.Position);
+        Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 }
