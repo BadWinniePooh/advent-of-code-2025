@@ -11,22 +11,8 @@ public class Dial(int startingPosition)
         
         if (input.StartsWith('L'))
         {
+            ExpectedPassword += CalculateLeftZeroCrossings(Position, rotationAmount);
             var newPosition = Position - rotationAmount;
-            
-            if (Position == MinPosition)
-            {
-                ExpectedPassword += rotationAmount / DialPositions;
-            }
-            else
-            {
-                var distanceFromZero = Position;
-                if (rotationAmount >= distanceFromZero)
-                {
-                    var remainingAfterFirstCross = rotationAmount - distanceFromZero;
-                    ExpectedPassword += 1 + (remainingAfterFirstCross / DialPositions);
-                }
-            }
-            
             Position = ((newPosition % DialPositions) + DialPositions) % DialPositions;
         }
         else if (input.StartsWith('R'))
@@ -35,6 +21,22 @@ public class Dial(int startingPosition)
             ExpectedPassword += newPosition / DialPositions;
             Position = newPosition % DialPositions;
         }
+    }
+
+    private int CalculateLeftZeroCrossings(int currentPosition, int amount)
+    {
+        if (currentPosition == MinPosition)
+        {
+            return amount / DialPositions;
+        }
+
+        if (amount < currentPosition)
+        {
+            return 0;
+        }
+        
+        var remainingAfterCrossing = amount - currentPosition;
+        return 1 + (remainingAfterCrossing / DialPositions);
     }
 
     public int Position { get; private set; } = startingPosition;
