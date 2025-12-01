@@ -63,7 +63,7 @@ public class TestRotatingLock
         Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Right Requirement, but not yet fixed")]
+    [Fact]
     public void WhenDialIsTurnedLeftOverZero_ThenExpectedPasswordIsSubtractedBy100()
     {
         var startingPosition = 50;
@@ -75,7 +75,7 @@ public class TestRotatingLock
         Assert.Equal(1, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Right Requirement, but not yet fixed")]
+    [Fact]
     public void RiddleExample()
     {
         var startingPosition = 50;
@@ -96,7 +96,7 @@ public class TestRotatingLock
         Assert.Equal(expectedPasswordInRiddle, sut.Dial.ExpectedPassword);
     }
 
-    [Fact(Skip = "Right Requirement, but not yet fixed")]
+    [Fact]
     public void LockSolver()
     {
         var expected = 6;
