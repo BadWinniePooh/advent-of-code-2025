@@ -10,24 +10,26 @@ public record IdPair(string FirstId, string SecondId)
     private static IdPair Parse(string idPair)
     {
         var pairSplitted = idPair.Split('-').ToList();
-        return new IdPair(pairSplitted.First(), pairSplitted.Last());
+        return new IdPair(pairSplitted[0], pairSplitted[1]);
     }
 
-    private long EvaluateId(string id)
+    private long EvaluateId(long id)
     {
-        for (var patternLength = 1; patternLength <= id.Length / 2; patternLength++)
+        var idString = id.ToString();
+        
+        for (var patternLength = 1; patternLength <= idString.Length / 2; patternLength++)
         {
-            if (id.Length % patternLength != 0)
+            if (idString.Length % patternLength != 0)
             {
                 continue;
             }
 
-            var pattern = id[..patternLength];
-            var repetitions = id.Length / patternLength;
+            var pattern = idString[..patternLength];
+            var repetitions = idString.Length / patternLength;
             var repeatedPattern = string.Concat(Enumerable.Repeat(pattern, repetitions));
-            if (repeatedPattern == id)
+            if (repeatedPattern == idString)
             {
-                return long.Parse(id);
+                return id;
             }
         }
         return 0;
@@ -41,7 +43,7 @@ public record IdPair(string FirstId, string SecondId)
         
         for (var counter = lowerDelimiter; counter <= upperDelimiter; counter++)
         {
-            sum += EvaluateId(counter.ToString());
+            sum += EvaluateId(counter);
         }
         
         return sum;

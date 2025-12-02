@@ -19,13 +19,8 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
     }
 
     public long SolveDay2()
-    {
-        if (RiddleInputs.Count() > 1)
-        {
-            throw new ArgumentException("Riddle input contains more than one line of text.", nameof(RiddleInputs));
-        }
-        
+    { 
         var computer = new GiftShopComputer();
-        return computer.SumInvalidIds(RiddleInputs.First());
+        return computer.SumInvalidIds(RiddleInputs.ToArray()[0]);
     }
 }
