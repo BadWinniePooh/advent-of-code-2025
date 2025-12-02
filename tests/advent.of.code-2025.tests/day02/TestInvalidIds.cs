@@ -3,7 +3,7 @@
 public class TestInvalidIds
 {
     [Fact]
-    public void TESTNAME()
+    public void WhenOnlyValidIds_ThenSumIsZero()
     {
         var sut = new GiftShopComputer();
         var actual = sut.SumInvalidIds("12-34");
@@ -11,7 +11,7 @@ public class TestInvalidIds
     }
 
     [Fact]
-    public void t2()
+    public void WhenOneInvalidId_ThenSumIsEqualToInvalidId()
     {
         var sut = new GiftShopComputer();
         var actual = sut.SumInvalidIds("11-34");
@@ -19,7 +19,7 @@ public class TestInvalidIds
     }
     
     [Fact]
-    public void t3()
+    public void WhenTwoInvalidIds_ThenSumIsEqualToSumOfInvalidIds()
     {
         var sut = new GiftShopComputer();
         var actual = sut.SumInvalidIds("11-22");
