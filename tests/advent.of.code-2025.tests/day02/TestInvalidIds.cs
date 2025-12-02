@@ -8,7 +8,7 @@ public class TestInvalidIds
     public void WhenOnlyValidIds_ThenSumIsZero()
     {
         var sut = new GiftShopComputer();
-        var actual = sut.SumInvalidIds("12-34");
+        var actual = sut.SumInvalidIds("12-20");
         Assert.Equal(0, actual);
     }
 
@@ -16,7 +16,7 @@ public class TestInvalidIds
     public void WhenOneInvalidId_ThenSumIsEqualToInvalidId()
     {
         var sut = new GiftShopComputer();
-        var actual = sut.SumInvalidIds("11-34");
+        var actual = sut.SumInvalidIds("11-20");
         Assert.Equal(11, actual);
     }
     
@@ -29,12 +29,26 @@ public class TestInvalidIds
     }
 
     [Theory]
-    [InlineData("11-22,95-115,1212-4567", 1245)]
-    [InlineData("11-22,95-115", 33)]
+    [InlineData("11-22,95-115", 132)]
+    [InlineData("11-22,95-115,998-1012", 1142)]
     public void GiftShopComputerCanAcceptMoreThanOnePairOfIds(string input, int expectedSum)
     {
         var sut = new GiftShopComputer();
         var actual = sut.SumInvalidIds(input);
+        Assert.Equal(expectedSum, actual);
+    }
+
+    [Fact(Skip="Misread the requirements")]
+    public void ApprovalTestByCode()
+    {
+        var input =
+            "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
+        var expectedSum = 1227775554;
+
+        var sut = new GiftShopComputer();
+
+        var actual = sut.SumInvalidIds(input);
+        
         Assert.Equal(expectedSum, actual);
     }
 }

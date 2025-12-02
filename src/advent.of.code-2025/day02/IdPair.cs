@@ -1,4 +1,4 @@
-﻿namespace advent.of.code_2025.tests.day02;
+﻿namespace advent.of.code_2025.day02;
 
 public record IdPair(string FirstId, string SecondId)
 {
@@ -23,8 +23,15 @@ public record IdPair(string FirstId, string SecondId)
 
     public int Verify()
     {
-        var sum = EvaluateId(FirstId);
-        sum += EvaluateId(SecondId);
+        var lowerDelimiter = int.Parse(FirstId);
+        var upperDelimiter = int.Parse(SecondId);
+        var sum = 0;
+        
+        for (var counter = lowerDelimiter; counter <= upperDelimiter; counter++)
+        {
+            sum += EvaluateId(counter.ToString());
+        }
+        
         return sum;
     }
 }

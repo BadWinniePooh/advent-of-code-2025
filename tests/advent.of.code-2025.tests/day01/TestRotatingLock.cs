@@ -78,7 +78,7 @@ public class TestRotatingLock
     }
 
     [Fact]
-    public void RiddleExample()
+    public void ApprovalTestByCode()
     {
         var startingPosition = 50;
         var expectedPasswordInRiddle = 6;
@@ -99,7 +99,7 @@ public class TestRotatingLock
     }
 
     [Fact]
-    public void LockSolver()
+    public void ApprovalTestByFile()
     {
         var expected = 6;
         var startingPosition = 50;

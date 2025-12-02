@@ -1,4 +1,4 @@
-﻿namespace advent.of.code_2025.tests.day02;
+﻿namespace advent.of.code_2025.day02;
 
 public class GiftShopComputer
 {
