@@ -29,8 +29,8 @@ public class TestInvalidIds
     }
 
     [Theory]
-    [InlineData("11-22,95-115", 132)]
-    [InlineData("11-22,95-115,998-1012", 1142)]
+    [InlineData("11-22,95-115", 243)]
+    [InlineData("11-22,95-115,998-1012", 2252)]
     public void GiftShopComputerCanAcceptMoreThanOnePairOfIds(string input, int expectedSum)
     {
         var sut = new GiftShopComputer();
@@ -43,7 +43,7 @@ public class TestInvalidIds
     {
         var input =
             "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
-        var expectedSum = 1227775554;
+        var expectedSum = 4174379265;
 
         var sut = new GiftShopComputer();
 
@@ -55,7 +55,7 @@ public class TestInvalidIds
     [Fact]
     public void ApprovalTestByFile()
     {
-        var expectedSum = 1227775554;
+        var expectedSum = 4174379265;
         var input = File.ReadAllLines("./Day02/TestInput.txt");
         var sut = new RiddleSolver(input);
 
