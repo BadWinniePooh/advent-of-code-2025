@@ -38,7 +38,7 @@ public class TestInvalidIds
         Assert.Equal(expectedSum, actual);
     }
 
-    [Fact(Skip="Misread the requirements")]
+    [Fact]
     public void ApprovalTestByCode()
     {
         var input =
