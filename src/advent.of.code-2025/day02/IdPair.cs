@@ -15,10 +15,22 @@ public record IdPair(string FirstId, string SecondId)
 
     private long EvaluateId(string id)
     {
-        var middle = id.Length / 2;
-        var firstPart = id[..middle];
-        var secondPart = id[middle..];
-        return firstPart == secondPart ? long.Parse(id) : 0;
+        for (var patternLength = 1; patternLength <= id.Length / 2; patternLength++)
+        {
+            if (id.Length % patternLength != 0)
+            {
+                continue;
+            }
+
+            var pattern = id[..patternLength];
+            var repetitions = id.Length / patternLength;
+            var repeatedPattern = string.Concat(Enumerable.Repeat(pattern, repetitions));
+            if (repeatedPattern == id)
+            {
+                return long.Parse(id);
+            }
+        }
+        return 0;
     }
 
     public long Verify()
