@@ -2,7 +2,7 @@
 
 public record IdPair(string FirstId, string SecondId)
 {
-    public static IEnumerable<IdPair> ConvertFrom(IEnumerable<string> idPairs)
+    public static IEnumerable<IdPair> ParseMany(IEnumerable<string> idPairs)
     {
         return idPairs.Select(idPair => Parse(idPair));
     }
