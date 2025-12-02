@@ -51,4 +51,16 @@ public class TestInvalidIds
         
         Assert.Equal(expectedSum, actual);
     }
+
+    [Fact]
+    public void ApprovalTestByFile()
+    {
+        var expectedSum = 1227775554;
+        var input = File.ReadAllLines("./Day02/TestInput.txt");
+        //var sut = new RiddleSolver(input);
+
+        //var actual = sut.SolveDay2();
+
+        //Assert.Equal(expectedSum, actual);
+    }
 }

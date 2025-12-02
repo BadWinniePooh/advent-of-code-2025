@@ -104,9 +104,9 @@ public class TestRotatingLock
         var expected = 6;
         var startingPosition = 50;
         var dialInput = File.ReadLines("./Day01/TestInput.txt");
-        var sut = new LockSolver(dialInput, startingPosition);
+        var sut = new RiddleSolver(dialInput);
         
-        var actual = sut.Solve();
+        var actual = sut.SolveDay1(startingPosition);
         
         Assert.Equal(expected, actual);
     }
@@ -170,9 +170,9 @@ public class TestRotatingLock
         var expected = 0;
         var startingPosition = 50;
         var dialInput = File.ReadLines("./Day01/PuzzleInput");
-        var sut = new LockSolver(dialInput, startingPosition);
+        var sut = new RiddleSolver(dialInput);
         
-        var actual = sut.Solve();
+        var actual = sut.SolveDay1(startingPosition);
         
         Assert.Equal(expected, actual);
     }
