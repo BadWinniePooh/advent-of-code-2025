@@ -2,7 +2,7 @@
 
 public class GiftShopComputer
 {
-    public int SumInvalidIds(string unformattedIds)
+    public long SumInvalidIds(string unformattedIds)
     {
         var idPairs = IdPair.ConvertFrom(unformattedIds.Split(','));
         return idPairs.Sum(idPair => idPair.Verify());

@@ -18,7 +18,7 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
         return dial.Password;
     }
 
-    public int SolveDay2()
+    public long SolveDay2()
     {
         if (RiddleInputs.Count() > 1)
         {

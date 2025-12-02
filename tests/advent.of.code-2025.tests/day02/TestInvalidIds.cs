@@ -63,4 +63,17 @@ public class TestInvalidIds
 
         Assert.Equal(expectedSum, actual);
     }
+
+    [Fact(DisplayName = "Solution", Skip = "Skip by default")]
+//    [Fact(DisplayName = "Solution")]
+    public void RiddleSolution()
+    {
+        var expectedSum = 0;
+        var input = File.ReadAllLines("./Day02/PuzzleInput");
+        var sut = new RiddleSolver(input);
+
+        var actual = sut.SolveDay2();
+
+        Assert.Equal(expectedSum, actual);
+    }
 }

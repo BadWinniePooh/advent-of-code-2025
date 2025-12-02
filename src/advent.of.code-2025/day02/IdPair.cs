@@ -13,19 +13,19 @@ public record IdPair(string FirstId, string SecondId)
         return new IdPair(pairSplitted.First(), pairSplitted.Last());
     }
 
-    private int EvaluateId(string id)
+    private long EvaluateId(string id)
     {
         var middle = id.Length / 2;
         var firstPart = id[..middle];
         var secondPart = id[middle..];
-        return firstPart == secondPart ? int.Parse(id) : 0;
+        return firstPart == secondPart ? long.Parse(id) : 0;
     }
 
-    public int Verify()
+    public long Verify()
     {
-        var lowerDelimiter = int.Parse(FirstId);
-        var upperDelimiter = int.Parse(SecondId);
-        var sum = 0;
+        var lowerDelimiter = long.Parse(FirstId);
+        var upperDelimiter = long.Parse(SecondId);
+        long sum = 0;
         
         for (var counter = lowerDelimiter; counter <= upperDelimiter; counter++)
         {
