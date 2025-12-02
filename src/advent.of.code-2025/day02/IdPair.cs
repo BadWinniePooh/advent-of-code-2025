@@ -13,7 +13,7 @@ public record IdPair(string FirstId, string SecondId)
         return new IdPair(pairSplitted[0], pairSplitted[1]);
     }
 
-    private long EvaluateId(long id)
+    private bool IsInvalidId(long id)
     {
         var idString = id.ToString();
         
@@ -29,21 +29,24 @@ public record IdPair(string FirstId, string SecondId)
             var repeatedPattern = string.Concat(Enumerable.Repeat(pattern, repetitions));
             if (repeatedPattern == idString)
             {
-                return id;
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 
     public long Verify()
     {
-        var lowerDelimiter = long.Parse(FirstId);
-        var upperDelimiter = long.Parse(SecondId);
+        var startId = long.Parse(FirstId);
+        var endId = long.Parse(SecondId);
         long sum = 0;
         
-        for (var counter = lowerDelimiter; counter <= upperDelimiter; counter++)
+        for (var currentId = startId; currentId <= endId; currentId++)
         {
-            sum += EvaluateId(counter);
+            if (IsInvalidId(currentId))
+            {
+                sum += currentId;
+            }
         }
         
         return sum;
