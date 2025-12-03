@@ -68,4 +68,34 @@ public class TestPowerunit
         
         Assert.Equal(165, actual);
     }
+
+    [Fact]
+    public void ApprovalTestByCode()
+    {
+        var listOfBanks = new List<Bank>
+        {
+            new("987654321111111"), 
+            new("811111111111119"), 
+            new("234234234234278"), 
+            new("818181911112111")
+        };
+        var expectedJoltage = 357;
+        var powerunit = new PowerUnit(listOfBanks);
+
+        var actual = powerunit.TotalJoltage();
+        
+        Assert.Equal(expectedJoltage, actual);
+    }
+
+    [Fact]
+    public void ApprovalTestByFile()
+    {
+        var expectedJoltage = 357;
+        var input = File.ReadAllLines("./Day03/TestInput.txt");
+        var sut = new RiddleSolver(input);
+
+        var actual = sut.SolveDay3();
+        
+        Assert.Equal(expectedJoltage, actual);
+    }
 }
