@@ -61,8 +61,24 @@ public class TestPowerunit
         
         Assert.Equal(747333477774, actual);
     }
+    
+    [Theory]
+    [InlineData("987654321111111", 987654321111)]
+    [InlineData("811111111111119", 811111111119)]
+    [InlineData("234234234234278", 434234234278)]
+    [InlineData("818181911112111", 888911112111)]
+    [InlineData("1222422522212436122221231224121422335412222222422", 654222222422)]
+    public void ZuLang(string input, long expected)
+    {
+        var listOfBanks = new List<Bank> { new(input) };
+        var powerunit = new PowerUnit(listOfBanks);
 
-    [Fact(Skip = "")]
+        var actual = powerunit.TotalJoltage();
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact(Skip = "skipped")]
     public void ApprovalTestByCode()
     {
         var listOfBanks = new List<Bank>
@@ -80,7 +96,7 @@ public class TestPowerunit
         Assert.Equal(expectedJoltage, actual);
     }
 
-    [Fact(Skip = "")]
+    [Fact(Skip = "skipped")]
     public void ApprovalTestByFile()
     {
         var expectedJoltage = 3121910778619;
