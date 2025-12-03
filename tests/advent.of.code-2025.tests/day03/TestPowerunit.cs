@@ -57,4 +57,15 @@ public class TestPowerunit
         
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void WhenMultiplePacksAreProvided_ThenPowerUnitSumsTotalJoltage()
+    {
+        var listOfBanks = new List<Bank> { new("525"), new("255"), new("552") };
+        var powerunit = new PowerUnit(listOfBanks);
+
+        var actual = powerunit.TotalJoltage();
+        
+        Assert.Equal(165, actual);
+    }
 }
