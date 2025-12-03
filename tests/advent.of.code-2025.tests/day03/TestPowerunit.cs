@@ -62,7 +62,7 @@ public class PowerUnit(List<Bank> listOfBanks)
 {
     public int TotalJoltage()
     {
-        return listOfBanks.First().Joltage();
+        return listOfBanks[0].Joltage();
     }
 }
 
@@ -136,12 +136,12 @@ public record Bank (string Batteries)
         return (batteryPack, batteryIndex);
     }
 
-    private (char, int) DetermineHighestJoltage(int index, char highestNumber, int batteryIndex)
+    private (char, int) DetermineHighestJoltage(int index, char highestJoltage, int batteryIndex)
     {
-        var currentNumber = Batteries[index];
-        var isHigher = currentNumber > highestNumber;
-        highestNumber = isHigher ? currentNumber : highestNumber;
+        var currentBatteryJoltage = Batteries[index];
+        var isHigher = currentBatteryJoltage > highestJoltage;
+        highestJoltage = isHigher ? currentBatteryJoltage : highestJoltage;
         batteryIndex = isHigher ? index : batteryIndex;
-        return (highestNumber, batteryIndex);
+        return (highestJoltage, batteryIndex);
     }
 }
