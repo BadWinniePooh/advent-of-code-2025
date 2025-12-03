@@ -3,11 +3,12 @@
 public record Bank (string Batteries)
 {
     private const char InvalidBattery = '-';
+    private List<int> selectedBatteries = new List<int>();
 
-    public int Joltage()
+    public long Joltage()
     {
         var joltageForBatteryBank = FindTwoBatteriesWithHighestVoltage();
-        return int.Parse(joltageForBatteryBank);
+        return long.Parse(joltageForBatteryBank);
     }
 
     private string FindTwoBatteriesWithHighestVoltage()
@@ -20,10 +21,27 @@ public record Bank (string Batteries)
         (batteryPack, batteryIndex) = FindBatteryWithHighestJoltage(currentHighestBattery, batteryIndex, batteryPack);
         
         // reset highest battery
-        currentHighestBattery = InvalidBattery;
-        batteryPack = FindBatteryWithSecondHighestJoltage(currentHighestBattery, batteryIndex, prependSecondNumber, batteryPack);
-
+        while (batteryPack.Length < Batteries.Length && batteryPack.Length < 12)
+        {
+            currentHighestBattery = InvalidBattery;
+            batteryPack = FindBatteryWithSecondHighestJoltage(currentHighestBattery, batteryIndex, prependSecondNumber, batteryPack);            
+        }
+        
+        batteryPack = SortBatteryPack();
+        
         return batteryPack;
+    }
+
+    private string SortBatteryPack()
+    {
+        var sortedBatteryPack = "";
+        selectedBatteries.Sort();
+        foreach (var selectedBattery in selectedBatteries)
+        {
+            sortedBatteryPack += Batteries[selectedBattery];
+        }
+
+        return sortedBatteryPack;
     }
 
     private string FindBatteryWithSecondHighestJoltage(char currentHighestBattery, int batteryIndex, bool prependSecondNumber,
@@ -32,6 +50,10 @@ public record Bank (string Batteries)
         // try find highest battery after found battery
         for (var index = batteryIndex + 1; index < Batteries.Length; index++)
         {
+            if (selectedBatteries.Contains(index))
+            {
+                continue;
+            }
             (currentHighestBattery, batteryIndex) = DetermineHighestJoltage(index, currentHighestBattery, batteryIndex);
         }
 
@@ -42,20 +64,17 @@ public record Bank (string Batteries)
             // find highest battery before found battery
             for (var index = batteryIndex - 1; index >= 0; index--)
             {
-                (currentHighestBattery, _) = DetermineHighestJoltage(index, currentHighestBattery, batteryIndex);
+                if (selectedBatteries.Contains(index))
+                {
+                    continue;
+                }
+                (currentHighestBattery, batteryIndex) = DetermineHighestJoltage(index, currentHighestBattery, batteryIndex);
             }
         }
 
         // join the two batteries without rearranging
-        if (prependSecondNumber)
-        {
-            batteryPack = currentHighestBattery + batteryPack;
-        }
-        else
-        { 
-            batteryPack += currentHighestBattery;
-        }
-
+        batteryPack += currentHighestBattery;
+        selectedBatteries.Add(batteryIndex);
         return batteryPack;
     }
 
@@ -67,6 +86,7 @@ public record Bank (string Batteries)
         }
 
         batteryPack += currentHighestBattery;
+        selectedBatteries.Add(batteryIndex);
         return (batteryPack, batteryIndex);
     }
 

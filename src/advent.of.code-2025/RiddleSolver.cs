@@ -25,7 +25,7 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
         return computer.SumInvalidIds(RiddleInputs.ToArray()[0]);
     }
 
-    public int SolveDay3()
+    public long SolveDay3()
     {
         var listOfBanks = new List<Bank>();
         foreach (var riddleInput in RiddleInputs)

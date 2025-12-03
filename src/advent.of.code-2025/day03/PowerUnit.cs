@@ -2,7 +2,7 @@
 
 public class PowerUnit(List<Bank> listOfBanks)
 {
-    public int TotalJoltage()
+    public long TotalJoltage()
     {
         return listOfBanks.Sum(b => b.Joltage());
     }

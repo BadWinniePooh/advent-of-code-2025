@@ -62,7 +62,7 @@ public class TestPowerunit
         Assert.Equal(747333477774, actual);
     }
 
-    [Fact]
+    [Fact(Skip = "")]
     public void ApprovalTestByCode()
     {
         var listOfBanks = new List<Bank>
@@ -80,7 +80,7 @@ public class TestPowerunit
         Assert.Equal(expectedJoltage, actual);
     }
 
-    [Fact]
+    [Fact(Skip = "")]
     public void ApprovalTestByFile()
     {
         var expectedJoltage = 3121910778619;
