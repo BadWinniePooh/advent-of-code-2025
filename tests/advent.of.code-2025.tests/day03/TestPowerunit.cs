@@ -98,4 +98,17 @@ public class TestPowerunit
         
         Assert.Equal(expectedJoltage, actual);
     }
+    
+    [Fact(DisplayName = "Solution", Skip = "Skip by default")]
+    //[Fact(DisplayName = "Solution")]
+    public void RiddleSolution()
+    {
+        var expectedJoltage = 0;
+        var input = File.ReadAllLines("./Day03/PuzzleInput");
+        var sut = new RiddleSolver(input);
+
+        var actual = sut.SolveDay3();
+        
+        Assert.Equal(expectedJoltage, actual);
+    }
 }
