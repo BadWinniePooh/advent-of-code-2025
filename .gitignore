@@ -1,4 +1,13 @@
+# Advent of Code specific ignores to adhere to the terms of service
+# Can I copy/redistribute part of Advent of Code?
+# Please don't. Advent of Code is free to use, not free to copy. If you're posting a code repository
+# somewhere, please don't include parts of Advent of Code like the puzzle text or your inputs.
+# If you're making a website, please don't make it look like Advent of Code or name it something similar.
+# Source: https://adventofcode.com/2025/about
+
 Day*.md
+**/PuzzleInput
+**/TestInput.txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains+all,csharp,visualstudio,visualstudiocode,rider,dotnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=jetbrains+all,csharp,visualstudio,visualstudiocode,rider,dotnetcore
@@ -742,5 +751,3 @@ fabric.properties
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains+all,csharp,visualstudio,visualstudiocode,rider,dotnetcore
-
-*/PuzzleInput
