@@ -78,7 +78,7 @@ public class TestPowerunit
         Assert.Equal(expected, actual);
     }
 
-    [Fact(Skip = "skipped")]
+    [Fact]
     public void ApprovalTestByCode()
     {
         var listOfBanks = new List<Bank>
@@ -96,7 +96,7 @@ public class TestPowerunit
         Assert.Equal(expectedJoltage, actual);
     }
 
-    [Fact(Skip = "skipped")]
+    [Fact]
     public void ApprovalTestByFile()
     {
         var expectedJoltage = 3121910778619;
