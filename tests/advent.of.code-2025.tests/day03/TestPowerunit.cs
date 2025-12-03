@@ -20,6 +20,18 @@ public class TestPowerunit
          * The order of batteries may not be changed (8192 -> 92 would be the highest)
          */
     }
+
+    [Fact]
+    public void WhenTheHigherBatteryIsOnTheRight_ThenBatteriesAreNotRearranged()
+    {
+        var listOfBanks = new List<Bank>();
+        listOfBanks.Add(new Bank("19"));
+        var powerunit = new PowerUnit(listOfBanks);
+
+        var actual = powerunit.TotalJoltage();
+        
+        Assert.Equal(19, actual);
+    }
 }
 
 public class PowerUnit(List<Bank> listOfBanks)
