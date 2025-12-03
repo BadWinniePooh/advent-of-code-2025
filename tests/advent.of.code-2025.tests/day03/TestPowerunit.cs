@@ -13,13 +13,6 @@ public class TestPowerunit
         var actual = powerunit.TotalJoltage();
         
         Assert.Equal(98, actual);
-
-        /*
-         * A powerunit contains a bank of batteries (string of batteries)
-         * A powerunit accepts a list of banks
-         * A powerunit can detect the highest combination in any bank
-         * The order of batteries may not be changed (8192 -> 92 would be the highest)
-         */
     }
 
     [Fact]
@@ -41,13 +34,13 @@ public class TestPowerunit
 
         var actual = powerunit.TotalJoltage();
         
-        Assert.Equal(92, actual);
+        Assert.Equal(192, actual);
     }
 
     [Theory]
-    [InlineData("525", 55)]
-    [InlineData("552", 55)]
-    [InlineData("255", 55)]
+    [InlineData("525", 525)]
+    [InlineData("552", 552)]
+    [InlineData("255", 255)]
     public void WhenDuplicatesExist_ThenCorrectBatteryCombinationIsFound(string batteryBank, int expected)
     {
         var listOfBanks = new List<Bank> { new(batteryBank) };
@@ -61,12 +54,12 @@ public class TestPowerunit
     [Fact]
     public void WhenMultiplePacksAreProvided_ThenPowerUnitSumsTotalJoltage()
     {
-        var listOfBanks = new List<Bank> { new("525"), new("255"), new("552") };
+        var listOfBanks = new List<Bank> { new("525111111111"), new("111111255111"), new("111111111552") };
         var powerunit = new PowerUnit(listOfBanks);
 
         var actual = powerunit.TotalJoltage();
         
-        Assert.Equal(165, actual);
+        Assert.Equal(747333477774, actual);
     }
 
     [Fact]
@@ -79,7 +72,7 @@ public class TestPowerunit
             new("234234234234278"), 
             new("818181911112111")
         };
-        var expectedJoltage = 357;
+        var expectedJoltage = 3121910778619;
         var powerunit = new PowerUnit(listOfBanks);
 
         var actual = powerunit.TotalJoltage();
@@ -90,7 +83,7 @@ public class TestPowerunit
     [Fact]
     public void ApprovalTestByFile()
     {
-        var expectedJoltage = 357;
+        var expectedJoltage = 3121910778619;
         var input = File.ReadAllLines("./Day03/TestInput.txt");
         var sut = new RiddleSolver(input);
 
