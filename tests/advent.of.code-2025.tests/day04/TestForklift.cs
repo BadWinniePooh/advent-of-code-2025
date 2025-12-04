@@ -46,6 +46,20 @@ public class TestForklift
         
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData("@@@@@", 5)]
+    [InlineData("..@..", 1)]
+    [InlineData(".@.@.", 2)]
+    public void CountAccessibleRolesInOneRow(string row, int expected)
+    {
+        var storage = new StorageUnit();
+        var storageLayout = new List<string> { row };
+
+        var actual = storage.CountAccessibleRolls(storageLayout);
+        
+        Assert.Equal(expected, actual);
+    }
 }
 
 public record Coordinate(int Row, int Column);
@@ -88,5 +102,19 @@ public class StorageUnit
         }
 
         return adjacentPaperRolls < AccessCriterium;
+    }
+
+    public int CountAccessibleRolls(List<string> storageLayout)
+    {
+        var accessibleRoles = 0;
+        for (var columnIndex = 0; columnIndex < storageLayout[0].Length; columnIndex++)
+        {
+            if (PaperRollIsAccessible(storageLayout, new Coordinate(0, columnIndex)))
+            {
+                accessibleRoles++;
+            }
+        }
+
+        return accessibleRoles;
     }
 }
