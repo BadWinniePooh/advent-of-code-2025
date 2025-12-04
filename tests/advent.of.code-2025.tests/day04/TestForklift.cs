@@ -12,11 +12,10 @@ public class TestForklift
     public void PaperRollInEmptyRowIsAccessible(string input, int row, int column)
     {
         var expected = false;
-        var storage = new StorageUnit();
         var location = new Coordinate(row, column);
         var storageLayout = new StorageLayout { input };
         
-        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
+        var actual = storageLayout.IsBlocked(location);
         
         Assert.Equal(expected, actual);
     }
@@ -25,11 +24,10 @@ public class TestForklift
     public void WhenTestedObjectIsEmptySpace_ThenItIsConsideredAsBlocked()
     {
         var expected = true;
-        var storage = new StorageUnit();
         var location = new Coordinate(0,0);
         var storageLayout = new StorageLayout { "..." };
         
-        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
+        var actual = storageLayout.IsBlocked(location);
         
         Assert.Equal(expected, actual);
     }
@@ -41,11 +39,10 @@ public class TestForklift
     public void PaperRollSurroundedByPaperRollsIsBlocked(string row1, string row2, string row3)
     {
         var expected = true;
-        var storage = new StorageUnit();
         var location = new Coordinate(1, 1);
         var storageLayout = new StorageLayout { row1, row2, row3 };
 
-        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
+        var actual = storageLayout.IsBlocked(location);
         
         Assert.Equal(expected, actual);
     }
@@ -54,11 +51,10 @@ public class TestForklift
     public void PaperRollInTwoByTwoIsAccessible()
     {
         var expected = false;
-        var storage = new StorageUnit();
         var location = new Coordinate(0, 0);
         var storageLayout = new StorageLayout { "@@", "@@" };
 
-        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
+        var actual = storageLayout.IsBlocked(location);
         
         Assert.Equal(expected, actual);
     }
