@@ -78,9 +78,9 @@ public class TestForklift
     }
 
     [Theory]
-    [InlineData("@@@", "@@@", "@@@", 4)]
-    [InlineData(".@.", "@@@", ".@.", 4)]
-    [InlineData("@@@", ".@.", "@@@", 6)]
+    [InlineData("@@@", "@@@", "@@@", 9)]
+    [InlineData(".@.", "@@@", ".@.", 5)]
+    [InlineData("@@@", ".@.", "@@@", 7)]
     public void CountAccessibleRolesInThreeByThreeArrangement(string row1, string row2, string row3, int expected)
     {
         var storage = new StorageUnit();
@@ -94,7 +94,7 @@ public class TestForklift
     [Fact]
     public void ApprovalTestByFile()
     {
-        var expected = 13;
+        var expected = 43;
         var storageLayout = File.ReadAllLines("./Day04/TestInput.txt");
         var sut = new RiddleSolver(storageLayout);
 

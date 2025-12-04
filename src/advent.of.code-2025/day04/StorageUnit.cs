@@ -5,6 +5,7 @@ public class StorageUnit
     private const char PaperRoll = '@';
     private const char EmptySpace = '.';
     private const int AccessCriterium = 4;
+    private List<string> _storageLayout;
 
     public bool PaperRollIsAccessible(List<string> storageLayout, Coordinate location)
     {
@@ -36,24 +37,44 @@ public class StorageUnit
                 }   
             }
         }
-
+        
         return adjacentPaperRolls < AccessCriterium;
     }
 
     public int CountAccessibleRolls(List<string> storageLayout)
     {
         var accessibleRoles = 0;
-        for (var rowIndex = 0; rowIndex < storageLayout.Count; rowIndex++)
+        bool paperRollWasRemoved;
+
+        do
         {
-            for (var columnIndex = 0; columnIndex < storageLayout[rowIndex].Length; columnIndex++)
+            paperRollWasRemoved = false;
+            for (var rowIndex = 0; rowIndex < storageLayout.Count; rowIndex++)
             {
-                if (PaperRollIsAccessible(storageLayout, new Coordinate(rowIndex, columnIndex)))
+                for (var columnIndex = 0; columnIndex < storageLayout[rowIndex].Length; columnIndex++)
                 {
-                    accessibleRoles++;
+                    var currentLocation = new Coordinate(rowIndex, columnIndex);
+                    if (PaperRollIsAccessible(storageLayout, currentLocation))
+                    {
+                        paperRollWasRemoved = RemovePaperRoll(storageLayout, currentLocation);
+                        accessibleRoles++;
+                    }
                 }
             }
-        }
+        } while (paperRollWasRemoved);
 
         return accessibleRoles;
+    }
+
+    private bool RemovePaperRoll(List<string> storageLayout, Coordinate currentLocation)
+    {
+        if (storageLayout[currentLocation.Row][currentLocation.Column] == PaperRoll)
+        {
+            storageLayout[currentLocation.Row] =
+                storageLayout[currentLocation.Row].Substring(0, currentLocation.Column) + EmptySpace +
+                storageLayout[currentLocation.Row].Substring(currentLocation.Column + 1);
+            return true;
+        }
+        return false;
     }
 }
