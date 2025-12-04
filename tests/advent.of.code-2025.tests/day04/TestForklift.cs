@@ -11,25 +11,25 @@ public class TestForklift
     [InlineData("..@", 0 , 2)]
     public void PaperRollInEmptyRowIsAccessible(string input, int row, int column)
     {
-        var expected = true;
+        var expected = false;
         var storage = new StorageUnit();
         var location = new Coordinate(row, column);
         var storageLayout = new List<string> { input };
         
-        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        var actual = storage.PaperRollIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
 
     [Fact]
-    public void WhenTestedObjectIsEmptySpace_ThenItIsCountedAsNotAccessible()
+    public void WhenTestedObjectIsEmptySpace_ThenItIsConsideredAsBlocked()
     {
-        var expected = false;
+        var expected = true;
         var storage = new StorageUnit();
         var location = new Coordinate(0,0);
         var storageLayout = new List<string> { "..." };
         
-        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        var actual = storage.PaperRollIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -38,14 +38,14 @@ public class TestForklift
     [InlineData("@@@", "@@@", "@@@")]
     [InlineData(".@.", "@@@", ".@.")]
     [InlineData("@.@", ".@.", "@.@")]
-    public void PaperRollSurroundedByPaperRollsIsNotAccessible(string row1, string row2, string row3)
+    public void PaperRollSurroundedByPaperRollsIsBlocked(string row1, string row2, string row3)
     {
-        var expected = false;
+        var expected = true;
         var storage = new StorageUnit();
         var location = new Coordinate(1, 1);
         var storageLayout = new List<string> { row1, row2, row3 };
 
-        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        var actual = storage.PaperRollIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -53,12 +53,12 @@ public class TestForklift
     [Fact]
     public void PaperRollInTwoByTwoIsAccessible()
     {
-        var expected = true;
+        var expected = false;
         var storage = new StorageUnit();
         var location = new Coordinate(0, 0);
         var storageLayout = new List<string> { "@@", "@@" };
 
-        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        var actual = storage.PaperRollIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
