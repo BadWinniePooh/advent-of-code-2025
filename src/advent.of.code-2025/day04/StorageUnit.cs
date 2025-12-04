@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace advent.of.code_2025.day04;
+﻿namespace advent.of.code_2025.day04;
 
 public class StorageUnit
 {
