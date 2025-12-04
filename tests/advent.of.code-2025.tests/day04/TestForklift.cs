@@ -2,14 +2,15 @@
 
 public class TestForklift
 {
-    [Fact]
-    public void PaperRollInEmptyColumnIsAccessible()
+    [Theory]
+    [InlineData(".@.", true, 0 , 1)]
+    [InlineData("@..", true, 0 , 0)]
+    public void PaperRollInEmptyColumnIsAccessible(string input, bool expected, int row, int column)
     {
-        var expected = true;
         var storage = new StorageUnit();
-        var location = new Coordinate(0, 1);
+        var location = new Coordinate(row, column);
         
-        var actual = storage.PaperRollIsAccessible(".@.", location);
+        var actual = storage.PaperRollIsAccessible(input, location);
         
         Assert.Equal(expected, actual);
     }
@@ -27,9 +28,14 @@ public class StorageUnit
     {
         var adjacentPaperRolls = 0;
 
-        for (var locationIndex = location.column - 1; locationIndex <= location.column + 1; locationIndex++)
+        for (var columnIndex = location.column - 1; columnIndex <= location.column + 1; columnIndex++)
         {
-            if (s[locationIndex] == PaperRoll)
+            if (columnIndex < 0)
+            {
+                continue;
+            }
+            
+            if (s[columnIndex] == PaperRoll)
             {
                 adjacentPaperRolls++;
             }
