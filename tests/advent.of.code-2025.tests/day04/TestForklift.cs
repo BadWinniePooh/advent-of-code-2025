@@ -122,8 +122,9 @@ public class StorageUnit
                 {
                     continue;
                 }
-                
-                if (storageLayout[rowIndex][columnIndex] == PaperRoll && new Coordinate(rowIndex, columnIndex) != location)
+
+                var isAdjacentPosition = new Coordinate(rowIndex, columnIndex) != location;
+                if (storageLayout[rowIndex][columnIndex] == PaperRoll && isAdjacentPosition)
                 {
                     adjacentPaperRolls++;
                 }   
