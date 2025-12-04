@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using advent.of.code_2025.day04;
 
 namespace advent.of.code_2025.tests.day04;
 
@@ -89,65 +90,16 @@ public class TestForklift
         
         Assert.Equal(expected, actual);
     }
-}
 
-public record Coordinate(int Row, int Column);
-
-
-public class StorageUnit
-{
-    private const char PaperRoll = '@';
-    private const char EmptySpace = '.';
-    private const int AccessCriterium = 4;
-
-    public bool PaperRollIsAccessible(List<string> storageLayout, Coordinate location)
+    [Fact]
+    public void ApprovalTestByFile()
     {
-        if (storageLayout[location.Row][location.Column] == EmptySpace)
-        {
-            return false;
-        }
+        var expected = 13;
+        var storageLayout = File.ReadAllLines("./Day04/TestInput.txt");
+        var sut = new RiddleSolver(storageLayout);
+
+        var actual = sut.SolveDay4();
         
-        var adjacentPaperRolls = 0;
-        
-        for (var columnIndex = location.Column - 1; columnIndex <= location.Column + 1; columnIndex++)
-        {
-            if (columnIndex < 0 || columnIndex >= storageLayout[location.Row].Length)
-            {
-                continue;
-            }
-
-            for (var rowIndex = location.Row - 1; rowIndex <= location.Row + 1; rowIndex++)
-            {
-                if (rowIndex < 0 || rowIndex >= storageLayout.Count)
-                {
-                    continue;
-                }
-
-                var isAdjacentPosition = new Coordinate(rowIndex, columnIndex) != location;
-                if (storageLayout[rowIndex][columnIndex] == PaperRoll && isAdjacentPosition)
-                {
-                    adjacentPaperRolls++;
-                }   
-            }
-        }
-
-        return adjacentPaperRolls < AccessCriterium;
-    }
-
-    public int CountAccessibleRolls(List<string> storageLayout)
-    {
-        var accessibleRoles = 0;
-        for (var rowIndex = 0; rowIndex < storageLayout.Count; rowIndex++)
-        {
-            for (var columnIndex = 0; columnIndex < storageLayout[rowIndex].Length; columnIndex++)
-            {
-                if (PaperRollIsAccessible(storageLayout, new Coordinate(rowIndex, columnIndex)))
-                {
-                    accessibleRoles++;
-                }
-            }
-        }
-
-        return accessibleRoles;
+        Assert.Equal(expected, actual);
     }
 }

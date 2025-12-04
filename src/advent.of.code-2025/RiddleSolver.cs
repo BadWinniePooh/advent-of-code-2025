@@ -1,6 +1,7 @@
 ﻿using advent.of.code_2025.day01;
 using advent.of.code_2025.day02;
 using advent.of.code_2025.day03;
+using advent.of.code_2025.day04;
 
 namespace advent.of.code_2025;
 
@@ -36,5 +37,11 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
         var powerUnit = new PowerUnit(listOfBanks);
 
         return powerUnit.TotalJoltage();
+    }
+
+    public int SolveDay4()
+    {
+        var storageUnit = new StorageUnit();
+        return storageUnit.CountAccessibleRolls(RiddleInputs.ToList());
     }
 }
