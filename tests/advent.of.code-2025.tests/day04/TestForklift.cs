@@ -76,7 +76,19 @@ public class TestForklift
         Assert.Equal(expected, actual);
     }
 
-    
+    [Theory]
+    [InlineData("@@@", "@@@", "@@@", 4)]
+    [InlineData(".@.", "@@@", ".@.", 4)]
+    [InlineData("@@@", ".@.", "@@@", 6)]
+    public void CountAccessibleRolesInThreeByThreeArrangement(string row1, string row2, string row3, int expected)
+    {
+        var storage = new StorageUnit();
+        var storageLayout = new List<string> { row1, row2, row3 };
+
+        var actual = storage.CountAccessibleRolls(storageLayout);
+        
+        Assert.Equal(expected, actual);
+    }
 }
 
 public record Coordinate(int Row, int Column);
