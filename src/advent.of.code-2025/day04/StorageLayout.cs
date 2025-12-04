@@ -2,12 +2,12 @@
 
 namespace advent.of.code_2025.day04;
 
-public class StorageLayout : List<string>
+public class StorageLayout : List<StorageRow>
 {
     private const int AccessCriterion = 4;
     
     public StorageLayout() {}
-    public StorageLayout(IEnumerable<string> collection) : base(collection){}
+    public StorageLayout(IEnumerable<StorageRow> collection) : base(collection){}
     public int Rows => Count;
 
     private StoragePlace At(Coordinate location)
@@ -59,19 +59,19 @@ public class StorageLayout : List<string>
         return adjacentPaperRolls >= AccessCriterion;
     }
 
-    public string Row(int row)
+    public StorageRow Row(int row)
     {
         return this[row];
     }
     
-    private string Row(Coordinate currentLocation)
+    private StorageRow Row(Coordinate currentLocation)
     {
         return Row(currentLocation.Row);
     }
 
-    private static bool IsColumnOutOfBounds(string storageRow, int columnIndex)
+    private static bool IsColumnOutOfBounds(StorageRow row, int columnIndex)
     {
-        return columnIndex < 0 || columnIndex >= storageRow.Columns();
+        return columnIndex < 0 || columnIndex >= row.Columns;
     }
 
     private bool IsRowOutOfBounds(int rowIndex)
@@ -82,10 +82,18 @@ public class StorageLayout : List<string>
 
 public static class StorageLayoutExtensions
 {
+    public static StorageRow ToStorageRow(this string input)
+    {
+        return new StorageRow(input.Select(c => (StoragePlace)c).ToArray());
+    }
+    
     public static StorageLayout ToStorageLayout(this IEnumerable<string> source)
     {
-        return new StorageLayout(source);
+        var list = new List<StorageRow>();
+        foreach (var line in source)
+        {
+            list.Add(line.ToStorageRow());
+        }
+        return new StorageLayout(list);
     }
-
-    public static int Columns(this string row) => row.Length;
 }

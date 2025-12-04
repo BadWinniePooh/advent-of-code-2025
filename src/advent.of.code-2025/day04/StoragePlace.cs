@@ -18,8 +18,6 @@ public sealed class StoragePlace(char value) : IEquatable<StoragePlace>
 
     public override int GetHashCode() => _value.GetHashCode();
     
-    public override string ToString() => $"{_value}";
-
     public bool IsFree() => Equals(FreeStoragePlace);
     
     public bool IsOccupied() => Equals(PaperRoll);

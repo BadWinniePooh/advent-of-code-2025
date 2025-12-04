@@ -13,7 +13,7 @@ public class TestForklift
     {
         var expected = false;
         var location = new Coordinate(row, column);
-        var storageLayout = new StorageLayout { input };
+        var storageLayout = new StorageLayout { input.ToStorageRow() };
         
         var actual = storageLayout.IsBlocked(location);
         
@@ -25,7 +25,7 @@ public class TestForklift
     {
         var expected = true;
         var location = new Coordinate(0,0);
-        var storageLayout = new StorageLayout { "..." };
+        var storageLayout = new StorageLayout { "...".ToStorageRow() };
         
         var actual = storageLayout.IsBlocked(location);
         
@@ -40,7 +40,7 @@ public class TestForklift
     {
         var expected = true;
         var location = new Coordinate(1, 1);
-        var storageLayout = new StorageLayout { row1, row2, row3 };
+        var storageLayout = new StorageLayout { row1.ToStorageRow(), row2.ToStorageRow(), row3.ToStorageRow() };
 
         var actual = storageLayout.IsBlocked(location);
         
@@ -52,7 +52,7 @@ public class TestForklift
     {
         var expected = false;
         var location = new Coordinate(0, 0);
-        var storageLayout = new StorageLayout { "@@", "@@" };
+        var storageLayout = new StorageLayout { "@@".ToStorageRow(), "@@".ToStorageRow() };
 
         var actual = storageLayout.IsBlocked(location);
         
@@ -66,7 +66,7 @@ public class TestForklift
     public void CountAccessibleRolesInOneRow(string row, int expected)
     {
         var storage = new StorageUnit();
-        var storageLayout = new StorageLayout { row };
+        var storageLayout = new StorageLayout { row.ToStorageRow() };
 
         var actual = storage.CountAccessibleRolls(storageLayout);
         
@@ -80,7 +80,7 @@ public class TestForklift
     public void CountAccessibleRolesInThreeByThreeArrangement(string row1, string row2, string row3, int expected)
     {
         var storage = new StorageUnit();
-        var storageLayout = new StorageLayout { row1, row2, row3 };
+        var storageLayout = new StorageLayout { row1.ToStorageRow(), row2.ToStorageRow(), row3.ToStorageRow()};
 
         var actual = storage.CountAccessibleRolls(storageLayout);
         
@@ -110,5 +110,12 @@ public class TestForklift
         var actual = sut.SolveDay4();
         
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void StorageRowEqualityCheck()
+    {
+        var row1 = new StorageRow(['.']);
+        Assert.True(row1.Equals(row1));
     }
 }

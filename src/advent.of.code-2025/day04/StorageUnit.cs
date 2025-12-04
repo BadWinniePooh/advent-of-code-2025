@@ -12,7 +12,7 @@ public class StorageUnit
             atleastOnePaperRollWasRemoved = false;
             for (var rowIndex = 0; rowIndex < storageLayout.Rows; rowIndex++)
             {
-                for (var columnIndex = 0; columnIndex < storageLayout.Row(rowIndex).Columns(); columnIndex++)
+                for (var columnIndex = 0; columnIndex < storageLayout.Row(rowIndex).Columns; columnIndex++)
                 {
                     var currentLocation = new Coordinate(rowIndex, columnIndex);
                     
