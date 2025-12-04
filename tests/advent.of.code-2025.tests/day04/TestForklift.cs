@@ -3,45 +3,87 @@
 public class TestForklift
 {
     [Theory]
-    [InlineData(".@.", true, 0 , 1)]
-    [InlineData("@..", true, 0 , 0)]
-    [InlineData("..@", true, 0 , 2)]
-    public void PaperRollInEmptyColumnIsAccessible(string input, bool expected, int row, int column)
+    [InlineData(".@.", 0 , 1)]
+    [InlineData("@..", 0 , 0)]
+    [InlineData("..@", 0 , 2)]
+    public void PaperRollInEmptyRowIsAccessible(string input, int row, int column)
     {
+        var expected = true;
         var storage = new StorageUnit();
         var location = new Coordinate(row, column);
+        var storageLayout = new List<string> { input };
         
-        var actual = storage.PaperRollIsAccessible(input, location);
+        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void WhenTestedObjectIsEmptySpace_ThenItIsCountedAsNotAccessible()
+    {
+        var expected = false;
+        var storage = new StorageUnit();
+        var location = new Coordinate(0,0);
+        var storageLayout = new List<string> { "..." };
+        
+        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void PaperRollSurroundedByPaperRollsIsNotAccessible()
+    {
+        var expected = false;
+        var storage = new StorageUnit();
+        var location = new Coordinate(1, 1);
+        var storageLayout = new List<string> { "@@@", "@@@", "@@@" };
+
+        var actual = storage.PaperRollIsAccessible(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
 }
 
-public record Coordinate(int row, int column);
+public record Coordinate(int Row, int Column);
 
 
 public class StorageUnit
 {
     private const char PaperRoll = '@';
     private const char EmptySpace = '.';
+    private const int AccessCriterium = 4;
 
-    public bool PaperRollIsAccessible(string storageUnit, Coordinate location)
+    public bool PaperRollIsAccessible(List<string> storageLayout, Coordinate location)
     {
-        var adjacentPaperRolls = 0;
-
-        for (var columnIndex = location.column - 1; columnIndex <= location.column + 1; columnIndex++)
+        if (storageLayout[location.Row][location.Column] == EmptySpace)
         {
-            if (columnIndex < 0 || columnIndex >= storageUnit.Length)
+            return false;
+        }
+        
+        var adjacentPaperRolls = 0;
+        
+        for (var columnIndex = location.Column - 1; columnIndex <= location.Column + 1; columnIndex++)
+        {
+            if (columnIndex < 0 || columnIndex >= storageLayout[location.Row].Length)
             {
                 continue;
             }
-            
-            if (storageUnit[columnIndex] == PaperRoll)
+
+            for (var rowIndex = location.Row - 1; rowIndex <= location.Row + 1; rowIndex++)
             {
-                adjacentPaperRolls++;
+                if (rowIndex < 0 || rowIndex >= storageLayout.Count)
+                {
+                    continue;
+                }
+                
+                if (storageLayout[rowIndex][columnIndex] == PaperRoll)
+                {
+                    adjacentPaperRolls++;
+                }   
             }
         }
 
-        return adjacentPaperRolls < 4;
+        return adjacentPaperRolls < AccessCriterium;
     }
 }
