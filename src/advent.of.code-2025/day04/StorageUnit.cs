@@ -68,13 +68,9 @@ public class StorageUnit
 
     private bool RemovePaperRoll(List<string> storageLayout, Coordinate currentLocation)
     {
-        if (storageLayout[currentLocation.Row][currentLocation.Column] == PaperRoll)
-        {
-            storageLayout[currentLocation.Row] =
-                storageLayout[currentLocation.Row].Substring(0, currentLocation.Column) + EmptySpace +
-                storageLayout[currentLocation.Row].Substring(currentLocation.Column + 1);
-            return true;
-        }
-        return false;
+        storageLayout[currentLocation.Row] =
+            storageLayout[currentLocation.Row].Substring(0, currentLocation.Column) + EmptySpace +
+            storageLayout[currentLocation.Row].Substring(currentLocation.Column + 1);
+        return true;
     }
 }
