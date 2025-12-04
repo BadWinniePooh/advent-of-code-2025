@@ -1,15 +1,15 @@
-﻿namespace advent.of.code_2025.day04;
+﻿using System.Collections;
+
+namespace advent.of.code_2025.day04;
 
 public class StorageUnit
 {
     #region BusinessConstants
-    private const char PaperRoll = '@';
-    private const char EmptySpace = '.';
     private const int AccessCriterion = 4;
     #endregion
 
 
-    public int CountAccessibleRolls(List<string> storageLayout)
+    public int CountAccessibleRolls(StorageLayout storageLayout)
     {
         var accessibleRoles = 0;
         bool atleastOnePaperRollWasRemoved;
@@ -23,9 +23,9 @@ public class StorageUnit
                 {
                     var currentLocation = new Coordinate(rowIndex, columnIndex);
                     
-                    if (PaperRollIsBlocked(storageLayout, currentLocation)) continue;
+                    if (StorageLocationIsBlocked(storageLayout, currentLocation)) continue;
                     
-                    atleastOnePaperRollWasRemoved = RemovePaperRoll(storageLayout, currentLocation);
+                    atleastOnePaperRollWasRemoved = storageLayout.FreeSpaceAt(currentLocation);
                     accessibleRoles++;
                 }
             }
@@ -34,9 +34,9 @@ public class StorageUnit
         return accessibleRoles;
     }
 
-    public bool PaperRollIsBlocked(List<string> storageLayout, Coordinate location)
+    public bool StorageLocationIsBlocked(StorageLayout storageLayout, Coordinate location)
     {
-        if (storageLayout[location.Row][location.Column] == EmptySpace)
+        if (storageLayout.At(location).IsFree())
         {
             return true;
         }
@@ -57,8 +57,9 @@ public class StorageUnit
                     continue;
                 }
 
-                var isAdjacentPosition = new Coordinate(rowIndex, columnIndex) != location;
-                if (storageLayout[rowIndex][columnIndex] == PaperRoll && isAdjacentPosition)
+                var currentLocation = new Coordinate(rowIndex, columnIndex);
+                var isAdjacentPosition =  currentLocation != location;
+                if (storageLayout.At(currentLocation).IsOccupied() && isAdjacentPosition)
                 {
                     adjacentPaperRolls++;
                 }   
@@ -76,17 +77,5 @@ public class StorageUnit
     private static bool IsRowOutOfBounds(int storageRowCount, int rowIndex)
     {
         return rowIndex < 0 || rowIndex >= storageRowCount;
-    }
-
-    private bool RemovePaperRoll(List<string> storageLayout, Coordinate currentLocation)
-    {
-        var rowPartBeforeCurrentLocation = storageLayout[currentLocation.Row][..currentLocation.Column];
-        var rowPartAfterCurrentLocation = storageLayout[currentLocation.Row][(currentLocation.Column + 1)..];
-        
-        // replace character at current location with EmptySpace
-        storageLayout[currentLocation.Row] =
-            rowPartBeforeCurrentLocation + EmptySpace +
-            rowPartAfterCurrentLocation;
-        return true;
     }
 }

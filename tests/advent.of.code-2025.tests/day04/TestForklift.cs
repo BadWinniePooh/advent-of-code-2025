@@ -14,9 +14,9 @@ public class TestForklift
         var expected = false;
         var storage = new StorageUnit();
         var location = new Coordinate(row, column);
-        var storageLayout = new List<string> { input };
+        var storageLayout = new StorageLayout { input };
         
-        var actual = storage.PaperRollIsBlocked(storageLayout, location);
+        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -27,9 +27,9 @@ public class TestForklift
         var expected = true;
         var storage = new StorageUnit();
         var location = new Coordinate(0,0);
-        var storageLayout = new List<string> { "..." };
+        var storageLayout = new StorageLayout { "..." };
         
-        var actual = storage.PaperRollIsBlocked(storageLayout, location);
+        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -43,9 +43,9 @@ public class TestForklift
         var expected = true;
         var storage = new StorageUnit();
         var location = new Coordinate(1, 1);
-        var storageLayout = new List<string> { row1, row2, row3 };
+        var storageLayout = new StorageLayout { row1, row2, row3 };
 
-        var actual = storage.PaperRollIsBlocked(storageLayout, location);
+        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -56,9 +56,9 @@ public class TestForklift
         var expected = false;
         var storage = new StorageUnit();
         var location = new Coordinate(0, 0);
-        var storageLayout = new List<string> { "@@", "@@" };
+        var storageLayout = new StorageLayout { "@@", "@@" };
 
-        var actual = storage.PaperRollIsBlocked(storageLayout, location);
+        var actual = storage.StorageLocationIsBlocked(storageLayout, location);
         
         Assert.Equal(expected, actual);
     }
@@ -70,7 +70,7 @@ public class TestForklift
     public void CountAccessibleRolesInOneRow(string row, int expected)
     {
         var storage = new StorageUnit();
-        var storageLayout = new List<string> { row };
+        var storageLayout = new StorageLayout { row };
 
         var actual = storage.CountAccessibleRolls(storageLayout);
         
@@ -84,7 +84,7 @@ public class TestForklift
     public void CountAccessibleRolesInThreeByThreeArrangement(string row1, string row2, string row3, int expected)
     {
         var storage = new StorageUnit();
-        var storageLayout = new List<string> { row1, row2, row3 };
+        var storageLayout = new StorageLayout { row1, row2, row3 };
 
         var actual = storage.CountAccessibleRolls(storageLayout);
         

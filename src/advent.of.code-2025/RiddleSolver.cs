@@ -42,6 +42,6 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
     public int SolveDay4()
     {
         var storageUnit = new StorageUnit();
-        return storageUnit.CountAccessibleRolls(RiddleInputs.ToList());
+        return storageUnit.CountAccessibleRolls(RiddleInputs.ToStorageLayout());
     }
 }
