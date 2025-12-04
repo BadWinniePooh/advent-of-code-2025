@@ -31,13 +31,16 @@ public class TestForklift
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void PaperRollSurroundedByPaperRollsIsNotAccessible()
+    [Theory]
+    [InlineData("@@@", "@@@", "@@@")]
+    [InlineData(".@.", "@@@", ".@.")]
+    [InlineData("@.@", ".@.", "@.@")]
+    public void PaperRollSurroundedByPaperRollsIsNotAccessible(string row1, string row2, string row3)
     {
         var expected = false;
         var storage = new StorageUnit();
         var location = new Coordinate(1, 1);
-        var storageLayout = new List<string> { "@@@", "@@@", "@@@" };
+        var storageLayout = new List<string> { row1, row2, row3 };
 
         var actual = storage.PaperRollIsAccessible(storageLayout, location);
         
