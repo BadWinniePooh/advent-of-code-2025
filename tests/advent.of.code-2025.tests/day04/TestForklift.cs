@@ -102,4 +102,17 @@ public class TestForklift
         
         Assert.Equal(expected, actual);
     }
+    
+    [Fact(DisplayName = "Solution", Skip = "Skip by default")]
+    //[Fact(DisplayName = "Solution")]
+    public void RiddleSolution()
+    {
+        var expected = 0;
+        var input = File.ReadAllLines("./Day04/PuzzleInput");
+        var sut = new RiddleSolver(input);
+
+        var actual = sut.SolveDay4();
+        
+        Assert.Equal(expected, actual);
+    }
 }
