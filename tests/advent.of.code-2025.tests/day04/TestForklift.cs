@@ -1,4 +1,6 @@
-﻿namespace advent.of.code_2025.tests.day04;
+﻿using System.Runtime.InteropServices;
+
+namespace advent.of.code_2025.tests.day04;
 
 public class TestForklift
 {
@@ -47,6 +49,19 @@ public class TestForklift
         Assert.Equal(expected, actual);
     }
 
+    [Fact]
+    public void PaperRollInTwoByTwoIsAccessible()
+    {
+        var expected = true;
+        var storage = new StorageUnit();
+        var location = new Coordinate(0, 0);
+        var storageLayout = new List<string> { "@@", "@@" };
+
+        var actual = storage.PaperRollIsAccessible(storageLayout, location);
+        
+        Assert.Equal(expected, actual);
+    }
+
     [Theory]
     [InlineData("@@@@@", 5)]
     [InlineData("..@..", 1)]
@@ -60,6 +75,8 @@ public class TestForklift
         
         Assert.Equal(expected, actual);
     }
+
+    
 }
 
 public record Coordinate(int Row, int Column);
@@ -94,7 +111,7 @@ public class StorageUnit
                     continue;
                 }
                 
-                if (storageLayout[rowIndex][columnIndex] == PaperRoll)
+                if (storageLayout[rowIndex][columnIndex] == PaperRoll && new Coordinate(rowIndex, columnIndex) != location)
                 {
                     adjacentPaperRolls++;
                 }   
@@ -107,11 +124,14 @@ public class StorageUnit
     public int CountAccessibleRolls(List<string> storageLayout)
     {
         var accessibleRoles = 0;
-        for (var columnIndex = 0; columnIndex < storageLayout[0].Length; columnIndex++)
+        for (var rowIndex = 0; rowIndex < storageLayout.Count; rowIndex++)
         {
-            if (PaperRollIsAccessible(storageLayout, new Coordinate(0, columnIndex)))
+            for (var columnIndex = 0; columnIndex < storageLayout[rowIndex].Length; columnIndex++)
             {
-                accessibleRoles++;
+                if (PaperRollIsAccessible(storageLayout, new Coordinate(rowIndex, columnIndex)))
+                {
+                    accessibleRoles++;
+                }
             }
         }
 
