@@ -50,6 +50,41 @@ public class TestIngredientManagement
         
         Assert.False(sut);
     }
+
+    [Theory]
+    [InlineData("18", "10-14", "12-18")]
+    [InlineData("10", "10-14", "12-18")]
+    [InlineData("13", "10-14", "12-18")]
+    public void IngredientIsFresh_WithMultipleRanges(string idString, string range1, string range2)
+    {
+        var id = idString.ToIngredient();
+        var ranges = new List<IngredientRange>
+        {
+            range1.ToRange(),
+            range2.ToRange()
+        };
+
+        var sut = id.IsFresh(ranges);
+        
+        Assert.True(sut);
+    }
+    
+    [Theory]
+    [InlineData("9", "10-14", "12-18")]
+    [InlineData("19", "10-14", "12-18")]
+    public void IngredientIsSpoiled_WithMultipleRanges(string idString, string range1, string range2)
+    {
+        var id = idString.ToIngredient();
+        var ranges = new List<IngredientRange>
+        {
+            range1.ToRange(),
+            range2.ToRange()
+        };
+
+        var sut = id.IsFresh(ranges);
+        
+        Assert.False(sut);
+    }
 }
 
 public class Database
@@ -87,6 +122,11 @@ public record IngredientRange(string Value)
     private int Separator => Value.IndexOf('-');
     public int StartId => int.Parse(Value[..Separator]);
     public int EndId => int.Parse(Value[(Separator + 1)..]);
+
+    public bool Contains(Ingredient ingredient)
+    {
+        return StartId <= ingredient.Id && ingredient.Id <= EndId;
+    }
 }
 
 public record Ingredient(string Value)
@@ -95,7 +135,12 @@ public record Ingredient(string Value)
 
     public bool IsFresh(IngredientRange range)
     {
-        return range.StartId <= Id && Id <= range.EndId;
+        return range.Contains(this);
+    }
+
+    public bool IsFresh(List<IngredientRange> ranges)
+    {
+        return ranges.Any(r => r.Contains(this));
     }
 }
 
