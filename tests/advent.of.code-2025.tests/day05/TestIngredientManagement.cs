@@ -91,9 +91,21 @@ public class TestIngredientManagement
     [Fact] public void ApprovalTestByFile_CountFreshIngredients()
     {
         var dirtyDb = File.ReadAllLines("./Day05/TestInput.txt");
-        var sut = new Database();
-        var actual = sut.CountFreshIngredients(dirtyDb);
+        var sut = new RiddleSolver(dirtyDb);
+        var actual = sut.SolveDay5();
         
         Assert.Equal(3, actual);
+    }
+    
+    //[Fact(DisplayName = "Solution", Skip = "Skip by default")]
+    [Fact(DisplayName = "Solution")]
+    public void RiddleSolution()
+    {
+        var expected = 0;
+        var dirtyDb = File.ReadAllLines("./Day05/PuzzleInput");
+        var sut = new RiddleSolver(dirtyDb);
+        var actual = sut.SolveDay5();
+
+        Assert.Equal(expected, actual);
     }
 }

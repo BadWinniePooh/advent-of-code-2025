@@ -29,7 +29,7 @@ public class Database
 
     public List<IngredientRange> FreshIngredientRanges { get; } = [];
 
-    public int CountFreshIngredients(string[] dirtyDb)
+    public long CountFreshIngredients(string[] dirtyDb)
     {
         InitDatabase(dirtyDb);
         return IngredientsInStorage.Count(i => i.IsFresh(FreshIngredientRanges));

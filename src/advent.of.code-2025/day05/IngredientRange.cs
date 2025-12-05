@@ -2,9 +2,9 @@
 
 public record IngredientRange(string Value)
 {
-    private int Separator => Value.IndexOf('-');
-    public int StartId => int.Parse(Value[..Separator]);
-    public int EndId => int.Parse(Value[(Separator + 1)..]);
+    private int SeparatorIndex => Value.IndexOf('-');
+    public long StartId => long.Parse(Value[..SeparatorIndex]);
+    public long EndId => long.Parse(Value[(SeparatorIndex + 1)..]);
 
     public bool Contains(Ingredient ingredient)
     {

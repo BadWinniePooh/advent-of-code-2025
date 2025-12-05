@@ -2,7 +2,7 @@
 
 public record Ingredient(string Value)
 {
-    public int Id => int.Parse(Value);
+    public long Id => long.Parse(Value);
 
     public bool IsFresh(IngredientRange range)
     {

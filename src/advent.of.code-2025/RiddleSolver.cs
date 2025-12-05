@@ -2,6 +2,7 @@
 using advent.of.code_2025.day02;
 using advent.of.code_2025.day03;
 using advent.of.code_2025.day04;
+using advent.of.code_2025.day05;
 
 namespace advent.of.code_2025;
 
@@ -43,5 +44,11 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
     {
         var storageUnit = new StorageUnit();
         return storageUnit.CountAccessibleRolls(RiddleInputs.ToStorageLayout());
+    }
+
+    public long SolveDay5()
+    {
+        var db = new Database();
+        return db.CountFreshIngredients(RiddleInputs.ToArray());
     }
 }
