@@ -23,6 +23,20 @@ public class TestIngredientManagement
         Assert.Equal(1, sut2.StartId);
         Assert.Equal(2, sut2.EndId);
     }
+
+    [Theory]
+    [InlineData("1", "1-2")]
+    [InlineData("2", "1-2")]
+    [InlineData("2", "1-3")]
+    public void IngredientIsInRange(string idString, string rangeString)
+    {
+        var id = idString.ToIngredient();
+        var range = rangeString.ToRange();
+
+        var sut = range.Contains(id);
+        
+        Assert.True(sut);
+    }
 }
 
 public class Database
@@ -60,9 +74,27 @@ public record IngredientRange(string range)
     private int Separator => range.IndexOf('-');
     public int StartId => int.Parse(range[..Separator]);
     public int EndId => int.Parse(range[(Separator + 1)..]);
+
+    public bool Contains(Ingredient ingredient)
+    {
+        return ingredient.Id >= StartId;
+    }
 }
 
 public record Ingredient(string ingredient)
 {
     public int Id => int.Parse(ingredient);
+}
+
+public static class IngredientExtensions
+{
+    public static Ingredient ToIngredient(this string input)
+    {
+        return new Ingredient(input);
+    }
+
+    public static IngredientRange ToRange(this string input)
+    {
+        return new IngredientRange(input);
+    }
 }
