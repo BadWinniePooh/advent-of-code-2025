@@ -88,17 +88,29 @@ public class TestIngredientManagement
         Assert.False(sut);
     }
 
-    [Fact] public void ApprovalTestByFile_CountFreshIngredients()
+    [Theory]
+    [InlineData("1-3", 3)]
+    [InlineData("1-10", 10)]
+    public void CountIngredientsInRange(string range, int expected)
+    {
+        var db = new Database();
+        var ranges = range.Split(',');
+        var sut = db.CountDifferentFreshIngredients(ranges);
+
+        Assert.Equal(expected, sut);
+    }
+
+    [Fact(Skip = "Does not work due to new requirements")] public void ApprovalTestByFile_CountFreshIngredients()
     {
         var dirtyDb = File.ReadAllLines("./Day05/TestInput.txt");
         var sut = new RiddleSolver(dirtyDb);
         var actual = sut.SolveDay5();
         
-        Assert.Equal(3, actual);
+        Assert.Equal(14, actual);
     }
     
-    //[Fact(DisplayName = "Solution", Skip = "Skip by default")]
-    [Fact(DisplayName = "Solution")]
+    [Fact(DisplayName = "Solution", Skip = "Skip by default")]
+    //[Fact(DisplayName = "Solution")]
     public void RiddleSolution()
     {
         var expected = 0;

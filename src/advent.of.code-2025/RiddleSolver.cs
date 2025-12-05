@@ -49,6 +49,6 @@ public class RiddleSolver(IEnumerable<string> riddleInputs)
     public long SolveDay5()
     {
         var db = new Database();
-        return db.CountFreshIngredients(RiddleInputs.ToArray());
+        return db.CountDifferentFreshIngredients(RiddleInputs.ToArray());
     }
 }

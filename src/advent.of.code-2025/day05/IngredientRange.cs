@@ -10,4 +10,15 @@ public record IngredientRange(string Value)
     {
         return StartId <= ingredient.Id && ingredient.Id <= EndId;
     }
+
+    public long Count()
+    {
+        var counter = 0;
+        for (var start = StartId; start <= EndId; start++)
+        {
+            counter++;
+        }
+
+        return counter;
+    }
 }

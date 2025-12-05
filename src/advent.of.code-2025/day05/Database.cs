@@ -29,9 +29,9 @@ public class Database
 
     public List<IngredientRange> FreshIngredientRanges { get; } = [];
 
-    public long CountFreshIngredients(string[] dirtyDb)
+    public long CountDifferentFreshIngredients(string[] dirtyDb)
     {
         InitDatabase(dirtyDb);
-        return IngredientsInStorage.Count(i => i.IsFresh(FreshIngredientRanges));
+        return FreshIngredientRanges.Sum(r => r.Count());
     }
 }
