@@ -28,14 +28,27 @@ public class TestIngredientManagement
     [InlineData("1", "1-2")]
     [InlineData("2", "1-2")]
     [InlineData("2", "1-3")]
-    public void IngredientIsInRange(string idString, string rangeString)
+    public void IngredientIsFresh(string idString, string rangeString)
     {
         var id = idString.ToIngredient();
         var range = rangeString.ToRange();
 
-        var sut = range.Contains(id);
+        var sut = range.IsFresh(id);
         
         Assert.True(sut);
+    }
+
+    [Theory]
+    [InlineData("1", "2-4")]
+    [InlineData("5", "2-4")]
+    public void IngredientIsSpoiled(string idString, string rangeString)
+    {
+        var id = idString.ToIngredient();
+        var range = rangeString.ToRange();
+
+        var sut = range.IsFresh(id);
+        
+        Assert.False(sut);
     }
 }
 
@@ -69,21 +82,21 @@ public class Database
     public List<IngredientRange> IngredientsInStorage { get; } = [];
 }
 
-public record IngredientRange(string range)
+public record IngredientRange(string Value)
 {
-    private int Separator => range.IndexOf('-');
-    public int StartId => int.Parse(range[..Separator]);
-    public int EndId => int.Parse(range[(Separator + 1)..]);
+    private int Separator => Value.IndexOf('-');
+    public int StartId => int.Parse(Value[..Separator]);
+    public int EndId => int.Parse(Value[(Separator + 1)..]);
 
-    public bool Contains(Ingredient ingredient)
+    public bool IsFresh(Ingredient ingredient)
     {
-        return ingredient.Id >= StartId;
+        return StartId <= ingredient.Id && ingredient.Id <= EndId;
     }
 }
 
-public record Ingredient(string ingredient)
+public record Ingredient(string Value)
 {
-    public int Id => int.Parse(ingredient);
+    public int Id => int.Parse(Value);
 }
 
 public static class IngredientExtensions
