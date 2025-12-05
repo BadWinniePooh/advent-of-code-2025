@@ -33,7 +33,7 @@ public class TestIngredientManagement
         var id = idString.ToIngredient();
         var range = rangeString.ToRange();
 
-        var sut = range.IsFresh(id);
+        var sut = id.IsFresh(range);
         
         Assert.True(sut);
     }
@@ -46,7 +46,7 @@ public class TestIngredientManagement
         var id = idString.ToIngredient();
         var range = rangeString.ToRange();
 
-        var sut = range.IsFresh(id);
+        var sut = id.IsFresh(range);
         
         Assert.False(sut);
     }
@@ -87,16 +87,16 @@ public record IngredientRange(string Value)
     private int Separator => Value.IndexOf('-');
     public int StartId => int.Parse(Value[..Separator]);
     public int EndId => int.Parse(Value[(Separator + 1)..]);
-
-    public bool IsFresh(Ingredient ingredient)
-    {
-        return StartId <= ingredient.Id && ingredient.Id <= EndId;
-    }
 }
 
 public record Ingredient(string Value)
 {
     public int Id => int.Parse(Value);
+
+    public bool IsFresh(IngredientRange range)
+    {
+        return range.StartId <= Id && Id <= range.EndId;
+    }
 }
 
 public static class IngredientExtensions
