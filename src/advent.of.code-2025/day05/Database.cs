@@ -32,6 +32,6 @@ public class Database
     public long CountDifferentFreshIngredients(string[] dirtyDb)
     {
         InitDatabase(dirtyDb);
-        return FreshIngredientRanges.Sum(r => r.Count());
+        return FreshIngredientRanges.CountDistinct();
     }
 }

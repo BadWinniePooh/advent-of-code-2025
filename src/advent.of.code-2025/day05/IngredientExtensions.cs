@@ -11,4 +11,12 @@ public static class IngredientExtensions
     {
         return new IngredientRange(input);
     }
+
+    private static List<Ingredient> _ingredients;
+    
+    public static void Add(this List<Ingredient> source, IngredientRange items)
+    {
+        _ingredients = source;
+        _ingredients.AddRange(items.ToList());
+    }
 }

@@ -92,6 +92,8 @@ public class TestIngredientManagement
     [InlineData("1-3", 3)]
     [InlineData("1-10", 10)]
     [InlineData("1-10,20-30", 21)]
+    [InlineData("1-10,5-15", 15)]
+    [InlineData("1-10,5-15,14-20", 20)]
     public void CountIngredientsInRange(string range, int expected)
     {
         var db = new Database();

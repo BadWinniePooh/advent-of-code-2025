@@ -11,14 +11,35 @@ public record IngredientRange(string Value)
         return StartId <= ingredient.Id && ingredient.Id <= EndId;
     }
 
-    public long Count()
+    public List<Ingredient> ToList()
     {
-        var counter = 0;
+        var counter = new List<Ingredient>();
         for (var start = StartId; start <= EndId; start++)
         {
-            counter++;
+            counter.Add(new Ingredient(start.ToString()));
         }
 
         return counter;
+    }
+}
+
+public static class IngredientRangeExtensions
+{
+    public static long CountDistinct(this List<IngredientRange> ranges)
+    {
+        var ingredients = ConvertToIngredients(ranges);
+        
+        return ingredients.Distinct().Count();
+    }
+
+    private static List<Ingredient> ConvertToIngredients(List<IngredientRange> ranges)
+    {
+        var result = new List<Ingredient>();
+        foreach (var range in ranges)
+        {
+            result.Add(range);
+        }
+
+        return result;
     }
 }
