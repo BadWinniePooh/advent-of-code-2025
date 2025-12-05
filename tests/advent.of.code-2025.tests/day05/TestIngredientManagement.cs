@@ -12,6 +12,17 @@ public class TestIngredientManagement
         Assert.Equal(4, sut.FreshIngredientRanges.Count);
         Assert.Equal(6, sut.IngredientsInStorage.Count);
     }
+
+    [Fact]
+    public void DataStructureContract()
+    {
+        var sut = new Ingredient("1");
+        Assert.Equal(1, sut.Id);
+
+        var sut2 = new IngredientRange("1-2");
+        Assert.Equal(1, sut2.StartId);
+        Assert.Equal(2, sut2.EndId);
+    }
 }
 
 public class Database
@@ -48,7 +59,7 @@ public record IngredientRange(string range)
 {
     private int Separator => range.IndexOf('-');
     public int StartId => int.Parse(range[..Separator]);
-    public int EndId => int.Parse(range[Separator..]);
+    public int EndId => int.Parse(range[(Separator + 1)..]);
 }
 
 public record Ingredient(string ingredient)
