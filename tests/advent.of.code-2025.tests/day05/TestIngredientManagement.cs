@@ -103,7 +103,8 @@ public class TestIngredientManagement
         Assert.Equal(expected, sut);
     }
 
-    [Fact(Skip = "Does not work due to new requirements")] public void ApprovalTestByFile_CountFreshIngredients()
+    [Fact]
+    public void ApprovalTestByFile_CountFreshIngredients()
     {
         var dirtyDb = File.ReadAllLines("./Day05/TestInput.txt");
         var sut = new RiddleSolver(dirtyDb);
